@@ -1,4 +1,7 @@
 import express from 'express';
+import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 const PORT = process.env.PORT || 3000;
@@ -20,26 +23,33 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/organizations', (req, res) => {
+app.get('/organizations', async (req, res) => {
+    const organizations = await getAllOrganizations();
+
     res.render('organizations', {
-        title: 'Organizations'
+        title: 'Organizations',
+        organizations
     });
 });
 
+app.get('/projects', async (req, res) => {
+    const projects = await getAllProjects();
 
-app.get('/projects', (req, res) => {
     res.render('projects', {
-        title: 'Projects'
+        title: 'Projects',
+        projects
     });
 });
 
 
-app.get('/categories', (req, res) => {
+app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
+
     res.render('categories', {
-        title: 'Categories'
+        title: 'Categories',
+        categories
     });
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://127.0.0.1:${PORT}`);

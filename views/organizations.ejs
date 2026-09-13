@@ -10,29 +10,28 @@
 
         <div class="cards">
 
-            <div class="card">
-                <img src="/images/organization.webp" alt="Community organization">
-                <h3>Helping Communities</h3>
-                <p>
-                    Support organizations that provide food, shelter, and assistance to families.
-                </p>
-            </div>
+            <% organizations.forEach(organization=> { %>
 
-            <div class="card">
-                <img src="/images/plantingatree.webp" alt="Planting trees">
-                <h3>Environmental Care</h3>
-                <p>
-                    Participate in projects focused on planting trees and protecting nature.
-                </p>
-            </div>
+                <div class="card">
 
-            <div class="card">
-                <img src="/images/trash.webp" alt="Cleaning parks">
-                <h3>Community Cleanup</h3>
-                <p>
-                    Join volunteers working together to keep parks and neighborhoods clean.
-                </p>
-            </div>
+                    <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %>">
+
+                    <h3>
+                        <%= organization.name %>
+                    </h3>
+
+                    <p>
+                        <%= organization.description %>
+                    </p>
+
+                    <p>
+                        <strong>Contact:</strong>
+                        <%= organization.contact_email %>
+                    </p>
+
+                </div>
+
+                <% }); %>
 
         </div>
 

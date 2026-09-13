@@ -10,22 +10,48 @@
 
         <div class="cards">
 
-            <div class="card">
-                <img src="/images/cleanup.webp" alt="Neighborhood cleanup">
+            <% projects.forEach(project=> { %>
 
-                <h3>Neighborhood Cleanup</h3>
-                <p>
-                    Help clean parks, streets, and public spaces while working with local volunteers.
-                </p>
-            </div>
+                <% let image='/images/hero-volunteers.jpg' ; if (project.title.toLowerCase().includes('cleanup')) {
+                    image='/images/cleanup.webp' ; } else if ( project.title.toLowerCase().includes('garden') ||
+                    project.title.toLowerCase().includes('farming') ||
+                    project.title.toLowerCase().includes('composting') ||
+                    project.title.toLowerCase().includes('planting') ) { image='/images/plantingatree.webp' ; } else if
+                    ( project.title.toLowerCase().includes('tutoring') || project.title.toLowerCase().includes('school')
+                    || project.title.toLowerCase().includes('workshop') ) { image='/images/teaching.webp' ; } else if
+                    (project.title.toLowerCase().includes('food')) { image='/images/trash.webp' ; } else if
+                    (project.title.toLowerCase().includes('community')) { image='/images/organization.webp' ; } %>
 
-            <div class="card">
-                <img src="/images/teaching.webp" alt="Teaching students">
-                <h3>Teaching Program</h3>
-                <p>
-                    Support students by sharing knowledge, tutoring, and encouraging lifelong learning.
-                </p>
-            </div>
+                    <div class="card">
+
+                        <img src="<%= image %>" alt="<%= project.title %>">
+
+                        <h3>
+                            <%= project.title %>
+                        </h3>
+
+                        <p>
+                            <strong>Organization:</strong>
+                            <%= project.organization_name %>
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            <%= project.location %>
+                        </p>
+
+                        <p>
+                            <strong>Date:</strong>
+                            <%= project.date.toLocaleDateString() %>
+                        </p>
+
+                        <p>
+                            <%= project.description %>
+                        </p>
+
+                    </div>
+
+                    <% }); %>
 
         </div>
 
