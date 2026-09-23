@@ -17,7 +17,9 @@
                     <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %>">
 
                     <h3>
-                        <%= organization.name %>
+                        <a href="/organization/<%= organization.organization_id %>">
+                            <%= organization.name %>
+                        </a>
                     </h3>
 
                     <p>

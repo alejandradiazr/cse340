@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+    <section class="organization-detail">
+
+        <h2>
+            <%= organization.name %>
+        </h2>
+
+        <div class="card">
+
+            <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %>">
+
+            <p>
+                <%= organization.description %>
+            </p>
+
+            <p>
+                <strong>Contact:</strong>
+                <%= organization.contact_email %>
+            </p>
+
+        </div>
+
+        <h2>Service Projects</h2>
+
+        <div class="cards">
+
+            <% projects.forEach(project=> { %>
+
+                <div class="card">
+
+                    <h3>
+                        <a href="/project/<%= project.project_id %>">
+                            <%= project.title %>
+                        </a>
+                    </h3>
+
+                    <p>
+                        <strong>Location:</strong>
+                        <%= project.location %>
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        <%= project.date.toLocaleDateString() %>
+                    </p>
+
+                    <p>
+                        <%= project.description %>
+                    </p>
+
+                </div>
+
+            <% }); %>
+
+        </div>
+
+    </section>
+
+    <%- include('partials/footer') %>
