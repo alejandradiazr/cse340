@@ -18,6 +18,13 @@ const buildProjectDetail = async (req, res) => {
     const projectId = req.params.id;
 
     const project = await getProjectById(projectId);
+
+    if (!project) {
+        return res.status(404).render('errors/404', {
+            title: 'Page Not Found'
+        });
+    }
+
     const categories = await getCategoriesByProjectId(projectId);
 
     res.render('project-detail', {
@@ -30,4 +37,4 @@ const buildProjectDetail = async (req, res) => {
 export {
     buildProjects,
     buildProjectDetail
-};
+}

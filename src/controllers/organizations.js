@@ -17,6 +17,13 @@ const buildOrganizationDetail = async (req, res) => {
     const organizationId = req.params.id;
 
     const organization = await getOrganizationById(organizationId);
+
+    if (!organization) {
+        return res.status(404).render('errors/404', {
+            title: 'Page Not Found'
+        });
+    }
+
     const projects = await getProjectsByOrganizationId(organizationId);
 
     res.render('organization-detail', {
