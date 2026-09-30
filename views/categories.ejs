@@ -8,6 +8,8 @@
             Browse different types of service opportunities and find a cause that matches your interests.
         </p>
 
+        <a href="/new-category">Create New Category</a>
+
         <div class="cards">
 
             <% categories.forEach(category=> { %>
@@ -67,20 +69,20 @@
                                     </p>
 
                                     <% } else if (category.name==='Food Assistance' ) { %>
-
-                                        <h3>
-                                            🍎
-                                            <a href="/category/<%= category.category_id %>">
+                                        <h3>🍎 <a href="/category/<%= category.category_id %>">
                                                 <%= category.name %>
-                                            </a>
-                                        </h3>
+                                            </a></h3>
+                                        <p>Opportunities that help provide food and support to individuals and families
+                                            in need.</p>
 
-                                        <p>
-                                            Opportunities that help provide food and support to individuals and families
-                                            in need.
-                                        </p>
+                                        <% } else { %>
+                                            <h3>📌 <a href="/category/<%= category.category_id %>">
+                                                    <%= category.name %>
+                                                </a></h3>
+                                            <p>Explore volunteer opportunities related to this category.</p>
+                                            <% } %>
 
-                                        <% } %>
+                                                <a href="/edit-category/<%= category.category_id %>">Edit</a>
 
                 </div>
 

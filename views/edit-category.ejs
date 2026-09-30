@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+    <section class="form-page">
+
+        <h2>Edit Category</h2>
+
+        <% if (typeof errors !=='undefined' && errors.length> 0) { %>
+            <div class="error-message">
+                <ul>
+                    <% errors.forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }); %>
+                </ul>
+            </div>
+            <% } %>
+
+                <form action="/edit-category/<%= category.category_id %>" method="POST">
+
+                    <div class="form-group">
+                        <label for="name">Category Name</label>
+
+                        <input type="text" id="name" name="name" value="<%= category.name %>" required maxlength="100">
+                    </div>
+
+                    <button type="submit">Update Category</button>
+
+                    <a href="/categories">Cancel</a>
+
+                </form>
+
+    </section>
+
+    <%- include('partials/footer') %>

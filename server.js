@@ -1,4 +1,6 @@
 import express from 'express';
+import session from 'express-session';
+import flash from 'connect-flash';
 
 import organizationRoutes from './src/routes/organizations.js';
 import projectRoutes from './src/routes/projects.js';
@@ -10,14 +12,33 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
 app.set('views', './views');
 
+app.use(
+    session({
+        secret: 'cse340-secret',
+        resave: false,
+        saveUninitialized: true
+    })
+);
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.messages = req.flash();
+    next();
+});
+
 app.use(organizationRoutes);
+
 app.use(projectRoutes);
+
 app.use(categoryRoutes);
 
 app.get('/', (req, res) => {

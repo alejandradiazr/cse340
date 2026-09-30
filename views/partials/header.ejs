@@ -5,24 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><%= title %> | Service Projects</title>
+    <title>
+        <%= title %> | Service Projects
+    </title>
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-<header>
-    <nav>
-        <h1>Service Projects</h1>
+    <header>
+        <nav>
+            <h1>Service Projects</h1>
 
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/organizations">Organizations</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/categories">Categories</a></li>
-        </ul>
-    </nav>
-</header>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/organizations">Organizations</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/categories">Categories</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
+    <% if (messages && messages.success) { %>
+        <% messages.success.forEach(message=> { %>
+            <div class="flash-message success">
+                <%= message %>
+            </div>
+            <% }); %>
+                <% } %>
+
+                    <% if (messages && messages.error) { %>
+                        <% messages.error.forEach(message=> { %>
+                            <div class="flash-message error">
+                                <%= message %>
+                            </div>
+                            <% }); %>
+                                <% } %>
+
+                                    <main>

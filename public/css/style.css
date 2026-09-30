@@ -244,3 +244,26 @@ footer p {
         width: 100%;
     }
 }
+
+/* Flash Messages */
+
+.flash-message {
+    max-width: 1000px;
+    margin: 1rem auto;
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.flash-message.success {
+    background-color: #e8f5e9;
+    color: #1b6525;
+    border: 1px solid #a5d6a7;
+}
+
+.flash-message.error {
+    background-color: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #ef9a9a;
+}

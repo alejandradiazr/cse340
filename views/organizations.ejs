@@ -8,6 +8,8 @@
             Explore organizations that are making a positive impact in communities around the world.
         </p>
 
+        <a href="/new-organization">Create New Organization</a>
+
         <div class="cards">
 
             <% organizations.forEach(organization=> { %>
@@ -30,6 +32,8 @@
                         <strong>Contact:</strong>
                         <%= organization.contact_email %>
                     </p>
+
+                    <a href="/edit-organization/<%= organization.organization_id %>">Edit Organization</a>
 
                 </div>
 

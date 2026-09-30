@@ -52,8 +52,61 @@ const getProjectsByOrganizationId = async (organizationId) => {
     return result.rows;
 };
 
+const createOrganization = async (name, description, contactEmail, logoFilename) => {
+    const query = `
+        INSERT INTO organization (
+            name,
+            description,
+            contact_email,
+            logo_filename
+        )
+        VALUES ($1, $2, $3, $4)
+        RETURNING *;
+    `;
+
+    const result = await pool.query(query, [
+        name,
+        description,
+        contactEmail,
+        logoFilename
+    ]);
+
+    return result.rows[0];
+};
+
+const updateOrganization = async (
+    organizationId,
+    name,
+    description,
+    contactEmail,
+    logoFilename
+) => {
+    const query = `
+        UPDATE organization
+        SET
+            name = $1,
+            description = $2,
+            contact_email = $3,
+            logo_filename = $4
+        WHERE organization_id = $5
+        RETURNING *;
+    `;
+
+    const result = await pool.query(query, [
+        name,
+        description,
+        contactEmail,
+        logoFilename,
+        organizationId
+    ]);
+
+    return result.rows[0];
+};
+
 export {
     getAllOrganizations,
     getOrganizationById,
-    getProjectsByOrganizationId
+    getProjectsByOrganizationId,
+    createOrganization,
+    updateOrganization
 };
