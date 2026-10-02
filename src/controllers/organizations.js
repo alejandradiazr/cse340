@@ -9,6 +9,7 @@ import {
 } from '../models/organizations.js';
 
 const buildOrganizations = async (req, res) => {
+
     const organizations = await getAllOrganizations();
 
     res.render('organizations', {
@@ -18,6 +19,7 @@ const buildOrganizations = async (req, res) => {
 };
 
 const buildOrganizationDetail = async (req, res) => {
+
     const organizationId = req.params.id;
 
     const organization = await getOrganizationById(organizationId);
@@ -38,19 +40,20 @@ const buildOrganizationDetail = async (req, res) => {
 };
 
 const buildNewOrganization = (req, res) => {
+
     res.render('new-organization', {
         title: 'New Organization'
     });
 };
 
 const createNewOrganization = async (req, res) => {
+
     const errors = validationResult(req);
 
     const {
         name,
         description,
-        contact_email,
-        logo_filename
+        contact_email
     } = req.body;
 
     if (!errors.isEmpty()) {
@@ -59,8 +62,7 @@ const createNewOrganization = async (req, res) => {
             errors: errors.array(),
             name,
             description,
-            contactEmail: contact_email,
-            logoFilename: logo_filename
+            contactEmail: contact_email
         });
     }
 
@@ -68,7 +70,7 @@ const createNewOrganization = async (req, res) => {
         name.trim(),
         description.trim(),
         contact_email.trim(),
-        logo_filename ? logo_filename.trim() : ''
+        'organization.webp'
     );
 
     req.flash('success', 'Organization created successfully.');
@@ -77,6 +79,7 @@ const createNewOrganization = async (req, res) => {
 };
 
 const buildEditOrganization = async (req, res) => {
+
     const organizationId = req.params.id;
 
     const organization = await getOrganizationById(organizationId);
@@ -94,6 +97,7 @@ const buildEditOrganization = async (req, res) => {
 };
 
 const updateOrganizationController = async (req, res) => {
+
     const errors = validationResult(req);
 
     const organizationId = req.params.id;

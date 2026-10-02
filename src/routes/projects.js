@@ -20,24 +20,36 @@ router.get('/new-project', buildNewProject);
 
 router.post(
     '/new-project',
+
     body('organization_id')
         .notEmpty()
         .withMessage('Please select an organization.'),
+
     body('title')
         .trim()
         .notEmpty()
-        .withMessage('Project title is required.'),
+        .withMessage('Project title is required.')
+        .isLength({ min: 3 })
+        .withMessage('Project title must be at least 3 characters long.'),
+
     body('description')
         .trim()
         .notEmpty()
-        .withMessage('Project description is required.'),
+        .withMessage('Project description is required.')
+        .isLength({ min: 3 })
+        .withMessage('Project description must be at least 3 characters long.'),
+
     body('location')
         .trim()
         .notEmpty()
-        .withMessage('Project location is required.'),
+        .withMessage('Project location is required.')
+        .isLength({ min: 3 })
+        .withMessage('Project location must be at least 3 characters long.'),
+
     body('date')
         .notEmpty()
         .withMessage('Project date is required.'),
+
     createNewProject
 );
 
@@ -45,24 +57,36 @@ router.get('/edit-project/:id', buildEditProject);
 
 router.post(
     '/edit-project/:id',
+
     body('organization_id')
         .notEmpty()
         .withMessage('Please select an organization.'),
+
     body('title')
         .trim()
         .notEmpty()
-        .withMessage('Project title is required.'),
+        .withMessage('Project title is required.')
+        .isLength({ min: 3 })
+        .withMessage('Project title must be at least 3 characters long.'),
+
     body('description')
         .trim()
         .notEmpty()
-        .withMessage('Project description is required.'),
+        .withMessage('Project description is required.')
+        .isLength({ min: 3 })
+        .withMessage('Project description must be at least 3 characters long.'),
+
     body('location')
         .trim()
         .notEmpty()
-        .withMessage('Project location is required.'),
+        .withMessage('Project location is required.')
+        .isLength({ min: 3 })
+        .withMessage('Project location must be at least 3 characters long.'),
+
     body('date')
         .notEmpty()
         .withMessage('Project date is required.'),
+
     updateProjectController
 );
 

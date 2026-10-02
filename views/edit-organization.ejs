@@ -21,29 +21,60 @@
                     <div class="form-group">
                         <label for="name">Organization Name</label>
 
-                        <input type="text" id="name" name="name" value="<%= organization.name %>" required
+                        <input type="text" id="name" name="name" value="<%= organization.name %>" required minlength="3"
                             maxlength="150">
                     </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
 
-                        <textarea id="description" name="description"
-                            required><%= organization.description %></textarea>
+                        <textarea id="description" name="description" required
+                            minlength="3"><%= organization.description %></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="contact_email">Contact Email</label>
 
                         <input type="email" id="contact_email" name="contact_email"
-                            value="<%= organization.contact_email %>" required maxlength="255">
+                            value="<%= organization.contact_email %>" required minlength="3" maxlength="255">
                     </div>
 
                     <div class="form-group">
-                        <label for="logo_filename">Logo Filename</label>
+                        <label for="logo_filename">Organization Image</label>
 
-                        <input type="text" id="logo_filename" name="logo_filename"
-                            value="<%= organization.logo_filename || '' %>" maxlength="255">
+                        <select id="logo_filename" name="logo_filename" required>
+
+                            <option value="organization.webp" <%=organization.logo_filename==='organization.webp'
+                                ? 'selected' : '' %>>
+                                Organization Placeholder
+                            </option>
+
+                            <option value="hero-volunteers.jpg" <%=organization.logo_filename==='hero-volunteers.jpg'
+                                ? 'selected' : '' %>>
+                                Volunteers
+                            </option>
+
+                            <option value="plantingatree.webp" <%=organization.logo_filename==='plantingatree.webp'
+                                ? 'selected' : '' %>>
+                                Planting a Tree
+                            </option>
+
+                            <option value="teaching.webp" <%=organization.logo_filename==='teaching.webp' ? 'selected'
+                                : '' %>>
+                                Teaching
+                            </option>
+
+                            <option value="cleanup.webp" <%=organization.logo_filename==='cleanup.webp' ? 'selected'
+                                : '' %>>
+                                Cleanup
+                            </option>
+
+                            <option value="trash.webp" <%=organization.logo_filename==='trash.webp' ? 'selected' : '' %>
+                                >
+                                Trash Cleanup
+                            </option>
+
+                        </select>
                     </div>
 
                     <button type="submit">Update Organization</button>

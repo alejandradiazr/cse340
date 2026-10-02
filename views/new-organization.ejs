@@ -22,14 +22,14 @@
                         <label for="name">Organization Name</label>
 
                         <input type="text" id="name" name="name" value="<%= typeof name !== 'undefined' ? name : '' %>"
-                            required maxlength="150">
+                            required minlength="3" maxlength="150">
                     </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
 
-                        <textarea id="description" name="description"
-                            required><%= typeof description !== 'undefined' ? description : '' %></textarea>
+                        <textarea id="description" name="description" required
+                            minlength="3"><%= typeof description !== 'undefined' ? description : '' %></textarea>
                     </div>
 
                     <div class="form-group">
@@ -37,14 +37,7 @@
 
                         <input type="email" id="contact_email" name="contact_email"
                             value="<%= typeof contactEmail !== 'undefined' ? contactEmail : '' %>" required
-                            maxlength="255">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="logo_filename">Logo Filename</label>
-
-                        <input type="text" id="logo_filename" name="logo_filename"
-                            value="<%= typeof logoFilename !== 'undefined' ? logoFilename : '' %>" maxlength="255">
+                            minlength="3" maxlength="255">
                     </div>
 
                     <button type="submit">Create Organization</button>
