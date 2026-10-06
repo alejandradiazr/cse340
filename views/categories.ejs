@@ -8,87 +8,95 @@
             Browse different types of service opportunities and find a cause that matches your interests.
         </p>
 
-        <a href="/new-category">Create New Category</a>
+        <% if (locals.account_type==='admin' ) { %>
+            <a href="/new-category">Create New Category</a>
+            <% } %>
 
-        <div class="cards">
+                <div class="cards">
 
-            <% categories.forEach(category=> { %>
+                    <% categories.forEach(category=> { %>
 
-                <div class="card">
+                        <div class="card">
 
-                    <% if (category.name==='Environmental' ) { %>
-
-                        <h3>
-                            🌱
-                            <a href="/category/<%= category.category_id %>">
-                                <%= category.name %>
-                            </a>
-                        </h3>
-
-                        <p>
-                            Projects focused on protecting nature, planting trees, and cleaning public spaces.
-                        </p>
-
-                        <% } else if (category.name==='Educational' ) { %>
-
-                            <h3>
-                                📚
-                                <a href="/category/<%= category.category_id %>">
-                                    <%= category.name %>
-                                </a>
-                            </h3>
-
-                            <p>
-                                Volunteer opportunities that support learning, tutoring, and mentoring students.
-                            </p>
-
-                            <% } else if (category.name==='Community Service' ) { %>
+                            <% if (category.name==='Environmental' ) { %>
 
                                 <h3>
-                                    🤝
+                                    🌱
                                     <a href="/category/<%= category.category_id %>">
                                         <%= category.name %>
                                     </a>
                                 </h3>
 
                                 <p>
-                                    Activities that help families and strengthen neighborhoods through volunteer work.
+                                    Projects focused on protecting nature, planting trees, and cleaning public spaces.
                                 </p>
 
-                                <% } else if (category.name==='Health and Wellness' ) { %>
+                                <% } else if (category.name==='Educational' ) { %>
 
                                     <h3>
-                                        ❤️
+                                        📚
                                         <a href="/category/<%= category.category_id %>">
                                             <%= category.name %>
                                         </a>
                                     </h3>
 
                                     <p>
-                                        Programs that promote healthy lifestyles and provide community health support.
+                                        Volunteer opportunities that support learning, tutoring, and mentoring students.
                                     </p>
 
-                                    <% } else if (category.name==='Food Assistance' ) { %>
-                                        <h3>🍎 <a href="/category/<%= category.category_id %>">
+                                    <% } else if (category.name==='Community Service' ) { %>
+
+                                        <h3>
+                                            🤝
+                                            <a href="/category/<%= category.category_id %>">
                                                 <%= category.name %>
-                                            </a></h3>
-                                        <p>Opportunities that help provide food and support to individuals and families
-                                            in need.</p>
+                                            </a>
+                                        </h3>
 
-                                        <% } else { %>
-                                            <h3>📌 <a href="/category/<%= category.category_id %>">
+                                        <p>
+                                            Activities that help families and strengthen neighborhoods through volunteer
+                                            work.
+                                        </p>
+
+                                        <% } else if (category.name==='Health and Wellness' ) { %>
+
+                                            <h3>
+                                                ❤️
+                                                <a href="/category/<%= category.category_id %>">
                                                     <%= category.name %>
-                                                </a></h3>
-                                            <p>Explore volunteer opportunities related to this category.</p>
-                                            <% } %>
+                                                </a>
+                                            </h3>
 
-                                                <a href="/edit-category/<%= category.category_id %>">Edit</a>
+                                            <p>
+                                                Programs that promote healthy lifestyles and provide community health
+                                                support.
+                                            </p>
+
+                                            <% } else if (category.name==='Food Assistance' ) { %>
+                                                <h3>🍎 <a href="/category/<%= category.category_id %>">
+                                                        <%= category.name %>
+                                                    </a></h3>
+                                                <p>Opportunities that help provide food and support to individuals and
+                                                    families
+                                                    in need.</p>
+
+                                                <% } else { %>
+                                                    <h3>📌 <a href="/category/<%= category.category_id %>">
+                                                            <%= category.name %>
+                                                        </a></h3>
+                                                    <p>Explore volunteer opportunities related to this category.</p>
+                                                    <% } %>
+
+                                                        <% if (locals.account_type==='admin' ) { %>
+                                                            <a
+                                                                href="/edit-category/<%= category.category_id %>">Edit</a>
+                                                            <% } %>
+
+                        </div>
+
+                        <% }); %>
 
                 </div>
-
-                <% }); %>
-
-        </div>
 
     </section>
 

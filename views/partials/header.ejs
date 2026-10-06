@@ -23,13 +23,29 @@
                 <li><a href="/organizations">Organizations</a></li>
                 <li><a href="/projects">Projects</a></li>
                 <li><a href="/categories">Categories</a></li>
+
+                <% if (locals.account_id) { %>
+
+                    <li><a href="/dashboard">Dashboard</a></li>
+
+                    <% if (locals.account_type==='admin' ) { %>
+                        <li><a href="/users">Users</a></li>
+                        <% } %>
+
+                            <li><a href="/account/logout">Logout</a></li>
+
+                            <% } else { %>
+
+                                <li><a href="/account/login">Login</a></li>
+                                <li><a href="/account/register">Register</a></li>
+
+                                <% } %>
             </ul>
         </nav>
     </header>
 
     <% if (messages && messages.success) { %>
-        <% messages.success.forEach(message=> { %>
-            <div class="flash-message success">
+        <% messages.success.forEach(message=> { %> <div class="flash-message success">
                 <%= message %>
             </div>
             <% }); %>
@@ -43,4 +59,12 @@
                             <% }); %>
                                 <% } %>
 
-                                    <main>
+                                    <% if (messages && messages.notice) { %>
+                                        <% messages.notice.forEach(message=> { %>
+                                            <div class="flash-message">
+                                                <%= message %>
+                                            </div>
+                                            <% }); %>
+                                                <% } %>
+
+                                                    <main>

@@ -7,9 +7,14 @@
 -- ========================================
 
 DROP TABLE IF EXISTS project_category;
+
 DROP TABLE IF EXISTS project;
+
 DROP TABLE IF EXISTS category;
+
 DROP TABLE IF EXISTS organization;
+
+DROP TABLE IF EXISTS account;
 
 
 CREATE TABLE organization (
@@ -290,3 +295,16 @@ VALUES
 (14, 3),
 
 (15, 3);
+
+-- ========================================
+-- Accounts / Users
+-- ========================================
+
+CREATE TABLE account (
+    account_id SERIAL PRIMARY KEY,
+    account_firstname VARCHAR(50) NOT NULL,
+    account_lastname VARCHAR(50) NOT NULL,
+    account_email VARCHAR(255) NOT NULL UNIQUE,
+    account_password VARCHAR(255) NOT NULL,
+    account_type VARCHAR(20) NOT NULL DEFAULT 'user'
+);

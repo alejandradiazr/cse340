@@ -11,14 +11,24 @@ import {
     updateOrganizationController
 } from '../controllers/organizations.js';
 
+import { requireLogin, requireRole } from '../middleware/auth.js';
+
 const router = express.Router();
 
 router.get('/organizations', buildOrganizations);
 
-router.get('/new-organization', buildNewOrganization);
+router.get(
+    '/new-organization',
+    requireLogin,
+    requireRole('admin'),
+    buildNewOrganization
+);
 
 router.post(
     '/edit-organization/:id',
+
+    requireLogin,
+    requireRole('admin'),
 
     body('name')
         .trim()
@@ -58,10 +68,18 @@ router.post(
     updateOrganizationController
 );
 
-router.get('/edit-organization/:id', buildEditOrganization);
+router.get(
+    '/edit-organization/:id',
+    requireLogin,
+    requireRole('admin'),
+    buildEditOrganization
+);
 
 router.post(
     '/new-organization',
+
+    requireLogin,
+    requireRole('admin'),
 
     body('name')
         .trim()

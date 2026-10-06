@@ -12,14 +12,24 @@ import {
     updateProjectCategoriesController
 } from '../controllers/projects.js';
 
+import { requireLogin, requireRole } from '../middleware/auth.js';
+
 const router = express.Router();
 
 router.get('/projects', buildProjects);
 
-router.get('/new-project', buildNewProject);
+router.get(
+    '/new-project',
+    requireLogin,
+    requireRole('admin'),
+    buildNewProject
+);
 
 router.post(
     '/new-project',
+
+    requireLogin,
+    requireRole('admin'),
 
     body('organization_id')
         .notEmpty()
@@ -53,10 +63,18 @@ router.post(
     createNewProject
 );
 
-router.get('/edit-project/:id', buildEditProject);
+router.get(
+    '/edit-project/:id',
+    requireLogin,
+    requireRole('admin'),
+    buildEditProject
+);
 
 router.post(
     '/edit-project/:id',
+
+    requireLogin,
+    requireRole('admin'),
 
     body('organization_id')
         .notEmpty()
@@ -92,10 +110,17 @@ router.post(
 
 router.get('/project/:id', buildProjectDetail);
 
-router.get('/project/:id/categories', buildProjectCategories);
+router.get(
+    '/project/:id/categories',
+    requireLogin,
+    requireRole('admin'),
+    buildProjectCategories
+);
 
 router.post(
     '/project/:id/categories',
+    requireLogin,
+    requireRole('admin'),
     updateProjectCategoriesController
 );
 

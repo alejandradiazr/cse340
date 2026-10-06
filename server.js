@@ -5,6 +5,9 @@ import flash from 'connect-flash';
 import organizationRoutes from './src/routes/organizations.js';
 import projectRoutes from './src/routes/projects.js';
 import categoryRoutes from './src/routes/categories.js';
+import accountRoutes from './src/routes/account.js';
+import userRoutes from './src/routes/users.js';
+import dashboardRoutes from './src/routes/dashboard.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
 
@@ -32,14 +35,17 @@ app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.messages = req.flash();
+    res.locals.account_id = req.session.account_id;
+    res.locals.account_type = req.session.account_type;
     next();
 });
 
 app.use(organizationRoutes);
-
 app.use(projectRoutes);
-
 app.use(categoryRoutes);
+app.use(accountRoutes);
+app.use(userRoutes);
+app.use(dashboardRoutes);
 
 app.get('/', (req, res) => {
     res.render('home', {

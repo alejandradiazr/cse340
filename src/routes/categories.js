@@ -10,16 +10,27 @@ import {
     updateCategoryController
 } from '../controllers/categories.js';
 
+import { requireLogin, requireRole } from '../middleware/auth.js';
+
 const router = express.Router();
 
 router.get('/categories', buildCategories);
 
 router.get('/category/:id', buildCategoryDetail);
 
-router.get('/new-category', buildNewCategory);
+router.get(
+    '/new-category',
+    requireLogin,
+    requireRole('admin'),
+    buildNewCategory
+);
 
 router.post(
     '/new-category',
+
+    requireLogin,
+    requireRole('admin'),
+
     body('name')
         .trim()
         .notEmpty()
@@ -31,10 +42,19 @@ router.post(
     createNewCategory
 );
 
-router.get('/edit-category/:id', buildEditCategory);
+router.get(
+    '/edit-category/:id',
+    requireLogin,
+    requireRole('admin'),
+    buildEditCategory
+);
 
 router.post(
     '/edit-category/:id',
+
+    requireLogin,
+    requireRole('admin'),
+
     body('name')
         .trim()
         .notEmpty()

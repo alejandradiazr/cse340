@@ -8,38 +8,42 @@
             Explore organizations that are making a positive impact in communities around the world.
         </p>
 
-        <a href="/new-organization">Create New Organization</a>
+        <% if (locals.account_type==='admin' ) { %>
+            <a href="/new-organization">Create New Organization</a>
+            <% } %>
 
-        <div class="cards">
+                <div class="cards">
 
-            <% organizations.forEach(organization=> { %>
+                    <% organizations.forEach(organization=> { %>
 
-                <div class="card">
+                        <div class="card">
 
-                    <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %>">
+                            <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %>">
 
-                    <h3>
-                        <a href="/organization/<%= organization.organization_id %>">
-                            <%= organization.name %>
-                        </a>
-                    </h3>
+                            <h3>
+                                <a href="/organization/<%= organization.organization_id %>">
+                                    <%= organization.name %>
+                                </a>
+                            </h3>
 
-                    <p>
-                        <%= organization.description %>
-                    </p>
+                            <p>
+                                <%= organization.description %>
+                            </p>
 
-                    <p>
-                        <strong>Contact:</strong>
-                        <%= organization.contact_email %>
-                    </p>
+                            <p>
+                                <strong>Contact:</strong>
+                                <%= organization.contact_email %>
+                            </p>
 
-                    <a href="/edit-organization/<%= organization.organization_id %>">Edit Organization</a>
+                            <% if (locals.account_type==='admin' ) { %>
+                                <a href="/edit-organization/<%= organization.organization_id %>">Edit Organization</a>
+                                <% } %>
+
+                        </div>
+
+                        <% }); %>
 
                 </div>
-
-                <% }); %>
-
-        </div>
 
     </section>
 

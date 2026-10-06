@@ -1,0 +1,42 @@
+<%- include('./partials/header') %>
+
+    <main class="container">
+        <h1>Users</h1>
+
+        <% if (users && users.length> 0) { %>
+
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% users.forEach(user=> { %>
+                        <tr>
+                            <td>
+                                <%= user.account_firstname %>
+                                    <%= user.account_lastname %>
+                            </td>
+                            <td>
+                                <%= user.account_email %>
+                            </td>
+                            <td>
+                                <%= user.account_type %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+
+            <% } else { %>
+
+                <p>No users have been registered yet.</p>
+
+                <% } %>
+    </main>
+
+    <%- include('./partials/footer') %>
