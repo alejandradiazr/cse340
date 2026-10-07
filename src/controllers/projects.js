@@ -17,6 +17,12 @@ import {
     getAllOrganizations
 } from '../models/organizations.js';
 
+import {
+    addVolunteer,
+    removeVolunteer,
+    isVolunteer
+} from '../models/volunteers.js';
+
 const buildProjects = async (req, res) => {
 
     const projects = await getAllProjects();
@@ -152,7 +158,6 @@ const updateProjectController = async (req, res) => {
 };
 
 const buildProjectDetail = async (req, res) => {
-
     const projectId = req.params.id;
 
     const project = await getProjectById(projectId);
@@ -165,11 +170,65 @@ const buildProjectDetail = async (req, res) => {
 
     const categories = await getCategoriesByProjectId(projectId);
 
+    let volunteerStatus = false;
+
+    if (req.session.account_id) {
+        volunteerStatus = await isVolunteer(
+            req.session.account_id,
+            projectId
+        );
+    }
+
     res.render('project-detail', {
         title: project.title,
         project,
-        categories
+        categories,
+        volunteerStatus
     });
+};
+
+const addProjectVolunteer = async (req, res) => {
+    const projectId = req.params.id;
+    const accountId = req.session.account_id;
+
+    const project = await getProjectById(projectId);
+
+    if (!project) {
+        return res.status(404).render('errors/404', {
+            title: 'Page Not Found'
+        });
+    }
+
+    await addVolunteer(accountId, projectId);
+
+    req.flash(
+        'success',
+        'You are now volunteering for this project.'
+    );
+
+    res.redirect(`/project/${projectId}`);
+};
+
+const removeProjectVolunteer = async (req, res) => {
+    const projectId = req.params.id;
+    const accountId = req.session.account_id;
+
+    const project = await getProjectById(projectId);
+
+    if (!project) {
+        return res.status(404).render('errors/404', {
+            title: 'Page Not Found'
+        });
+    }
+
+    await removeVolunteer(accountId, projectId);
+
+    req.flash(
+        'success',
+        'You are no longer volunteering for this project.'
+    );
+
+    res.redirect(`/project/${projectId}`);
 };
 
 const buildProjectCategories = async (req, res) => {
@@ -227,6 +286,8 @@ export {
     buildEditProject,
     updateProjectController,
     buildProjectDetail,
+    addProjectVolunteer,
+    removeProjectVolunteer,
     buildProjectCategories,
     updateProjectCategoriesController
 };

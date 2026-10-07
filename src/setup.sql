@@ -6,16 +6,12 @@
 -- Organizations
 -- ========================================
 
+DROP TABLE IF EXISTS volunteer;
 DROP TABLE IF EXISTS project_category;
-
 DROP TABLE IF EXISTS project;
-
 DROP TABLE IF EXISTS category;
-
 DROP TABLE IF EXISTS organization;
-
 DROP TABLE IF EXISTS account;
-
 
 CREATE TABLE organization (
     organization_id SERIAL PRIMARY KEY,
@@ -307,4 +303,25 @@ CREATE TABLE account (
     account_email VARCHAR(255) NOT NULL UNIQUE,
     account_password VARCHAR(255) NOT NULL,
     account_type VARCHAR(20) NOT NULL DEFAULT 'user'
+);
+
+-- ========================================
+-- Volunteer / Project Relationship
+-- Many-to-Many
+-- ========================================
+
+CREATE TABLE volunteer (
+    account_id INT NOT NULL,
+    project_id INT NOT NULL,
+    PRIMARY KEY (account_id, project_id),
+
+    CONSTRAINT fk_volunteer_account
+        FOREIGN KEY (account_id)
+        REFERENCES account (account_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id)
+        REFERENCES project (project_id)
+        ON DELETE CASCADE
 );

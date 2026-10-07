@@ -6,10 +6,19 @@ import {
     registerAccountController,
     buildLogin,
     loginAccount,
-    logoutAccount
+    logoutAccount,
+    buildDashboard
 } from '../controllers/account.js'
 
+import { requireLogin } from '../middleware/auth.js'
+
 const router = express.Router()
+
+router.get(
+    '/dashboard',
+    requireLogin,
+    buildDashboard
+);
 
 /* ***************************
  * Registration

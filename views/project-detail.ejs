@@ -37,11 +37,35 @@
                     <% }); %>
             </div>
 
-            <% if (locals.account_type==='admin' ) { %>
-                <a href="/project/<%= project.project_id %>/categories">
-                    Reassign Categories
-                </a>
+            <% if (locals.account_id) { %>
+
+                <div class="volunteer-section">
+                    <% if (volunteerStatus) { %>
+
+                        <p>
+                            You are volunteering for this project.
+                        </p>
+
+                        <a href="/project/<%= project.project_id %>/volunteer/remove">
+                            Remove volunteering
+                        </a>
+
+                        <% } else { %>
+
+                            <a href="/project/<%= project.project_id %>/volunteer">
+                                Volunteer for this project
+                            </a>
+
+                            <% } %>
+                </div>
+
                 <% } %>
+
+                    <% if (locals.account_type==='admin' ) { %>
+                        <a href="/project/<%= project.project_id %>/categories">
+                            Reassign Categories
+                        </a>
+                        <% } %>
         </div>
     </section>
 

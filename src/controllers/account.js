@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt'
 import { validationResult } from 'express-validator'
 import { registerAccount, getAccountByEmail } from '../models/account.js'
 
+import { getProjectsByAccountId } from '../models/volunteers.js';
+
 /* ***************************
  * Build registration view
  * ************************** */
@@ -124,3 +126,16 @@ export function logoutAccount(req, res) {
         res.redirect('/')
     })
 }
+
+export const buildDashboard = async (req, res) => {
+    const accountId = req.session.account_id;
+
+    const projects = await getProjectsByAccountId(accountId);
+
+    res.render('dashboard', {
+        title: 'Dashboard',
+        projects,
+        account_firstname: req.session.account_firstname,
+        account_type: req.session.account_type
+    });
+};

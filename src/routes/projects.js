@@ -8,6 +8,8 @@ import {
     buildEditProject,
     updateProjectController,
     buildProjectDetail,
+    addProjectVolunteer,
+    removeProjectVolunteer,
     buildProjectCategories,
     updateProjectCategoriesController
 } from '../controllers/projects.js';
@@ -109,6 +111,18 @@ router.post(
 );
 
 router.get('/project/:id', buildProjectDetail);
+
+router.get(
+    '/project/:id/volunteer',
+    requireLogin,
+    addProjectVolunteer
+);
+
+router.get(
+    '/project/:id/volunteer/remove',
+    requireLogin,
+    removeProjectVolunteer
+);
 
 router.get(
     '/project/:id/categories',

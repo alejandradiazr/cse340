@@ -10,6 +10,56 @@
         <p>
             You are logged in as <%= account_type %>.
         </p>
+
+        <h2>Your Volunteer Projects</h2>
+
+        <% if (projects.length> 0) { %>
+
+            <div class="project-list">
+
+                <% projects.forEach(project=> { %>
+
+                    <div class="card">
+
+                        <h3>
+                            <a href="/project/<%= project.project_id %>">
+                                <%= project.title %>
+                            </a>
+                        </h3>
+
+                        <p>
+                            <strong>Organization:</strong>
+                            <%= project.organization_name %>
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            <%= project.location %>
+                        </p>
+
+                        <p>
+                            <strong>Date:</strong>
+                            <%= project.date.toLocaleDateString() %>
+                        </p>
+
+                        <a href="/project/<%= project.project_id %>/volunteer/remove">
+                            Remove volunteering
+                        </a>
+
+                    </div>
+
+                    <% }) %>
+
+            </div>
+
+            <% } else { %>
+
+                <p>
+                    You are not volunteering for any projects yet.
+                </p>
+
+                <% } %>
+
     </main>
 
     <%- include('partials/footer') %>
